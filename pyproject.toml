@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "api-framework-comparison"
+version = "0.1.0"
+description = "Demo project to compare different API frameworks"
+authors = []
+readme = "README.md"
+packages = [
+    { include = "fastapi_test" },
+    { include = "flask_test" },
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+poethepoet = "^0.26.1"
+ruff = "^0.4.8"
+
+
+[tool.poetry.group.fastapi.dependencies]
+fastapi = "^0.111.0"
+
+
+[tool.poetry.group.flask.dependencies]
+flask = {version="^3.0.3", extras=["async"]}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+# Allow lines to be as long as 120.
+line-length = 120
+
+
+[tool.poe.tasks]
+start-fastapi = "fastapi dev fastapi_test/app.py"
+start-flask = "flask --app flask_test/app.py run"
+format = "ruff format"
+lint = "ruff check"
